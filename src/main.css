@@ -1,0 +1,33 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: rgb(46, 44, 44);
+}
+
+label {
+  font-size: 18px;
+  color: rgb(60, 107, 110);
+  font-weight: 600;
+}
+
+button {
+  outline: none;
+  background-color: rgb(122, 133, 134);
+  border: 1px solid rgb(122, 133, 134);
+  width: 120px;
+  height: 40px;
+  border-radius: 20px;
+  transition: transform 250ms linear;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
