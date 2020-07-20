@@ -1,23 +1,15 @@
-import types from "./phonebook-types";
+import { createAction } from "@reduxjs/toolkit";
 import shortId from "shortid";
 
-const addContact = (name, number) => ({
-  type: types.ADD,
+const addContact = createAction("phonebook/add", (name, number) => ({
   payload: {
     id: shortId.generate(),
     name,
     number,
   },
-});
+}));
 
-const deleteContact = (contactId) => ({
-  type: types.DELETE,
-  payload: contactId,
-});
-
-const filter = (value) => ({
-  type: types.CHANGE,
-  payload: value,
-});
+const deleteContact = createAction("phonebook/delete");
+const filter = createAction("phonebook/change");
 
 export default { addContact, deleteContact, filter };
