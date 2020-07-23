@@ -15,9 +15,26 @@ class ContactForm extends Component {
     this.setState({ name: "", number: "" });
   };
 
+  getSameName = (name) => {
+    const { contacts } = this.props;
+    return contacts.some((contact) => contact.name === name.trim());
+  };
+
   handleSubmit = (e) => {
     const { number, name } = this.state;
     e.preventDefault();
+
+    if (name === "") {
+      alert(`Add name please!`);
+      this.reset();
+      return;
+    }
+
+    if (this.getSameName(name)) {
+      alert(`${name.trim()} is already in contacts`);
+      this.reset();
+      return;
+    }
     this.props.onSubmit(name, number);
     this.reset();
   };
@@ -58,9 +75,13 @@ class ContactForm extends Component {
   }
 }
 
+const mapStateToProps = ({ contacts: { contacts } }) => ({
+  contacts,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (name, number) =>
     dispatch(phonebookActions.addContact(name, number)),
 });
 
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
